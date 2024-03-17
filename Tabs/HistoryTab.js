@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Button, FlatList  } from 'react-native';
 import { getData, storeData } from '../utils/db';
-import { useIsFocused } from '@react-navigation/native'; // Import the hook
+import { useIsFocused } from '@react-navigation/native'; 
 
 
 const HistoryTab = () => {
     const [spendings, setSpendings] = useState([]);
-    const isFocused = useIsFocused(); // Get the isFocused value from the hook
+    const isFocused = useIsFocused(); 
 
     const loadSpendings = useCallback(async () => {
         try {
@@ -19,13 +19,13 @@ const HistoryTab = () => {
         } catch (error) {
             console.error('Error loading spendings:', error);
         }
-    }, []); // Include the dependencies array
+    }, []); 
 
     useEffect(() => {
         if (isFocused) {
-            loadSpendings(); // Load spendings when the tab is focused
+            loadSpendings(); 
         }
-    }, [isFocused, loadSpendings]); // Include isFocused and loadSpendings in the dependencies array
+    }, [isFocused, loadSpendings]); 
 
     const renderSpendingItem = ({ item }) => (
         <View style={styles.item}>

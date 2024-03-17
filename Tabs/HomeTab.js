@@ -127,8 +127,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     marginLeft: 10,
-    flexDirection: 'column', // Align children vertically
-    alignItems: 'flex-end', // Align children to the end (bottom)
+    flexDirection: 'column', 
+    alignItems: 'flex-end', 
 
   },
   spentText: {
