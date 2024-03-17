@@ -1,0 +1,1 @@
+export const phrases = ["You're swimming in wealth!", '¡Estás viviendo la buena vida!', "You're sitting on a gold mine!", "¡Eres un mago financiero!", "You're dripping in gold!"]
