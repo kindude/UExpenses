@@ -4,23 +4,18 @@ import RandomPhrase from '../utils/randomizer';
 import { storeData, getData } from '../utils/db';
 import uuid from 'react-native-uuid';
 
-const CustomModal = ({ modalVisible, toggleModal }) => {
+const ModalUpdate = ({ modalVisible, toggleModal }) => {
     const [number, onChangeNumber] = useState('');
     const [title, setTitle] = useState('');
     const [description, OnDescriptionChange] = useState('');
 
     useEffect(() => {
         setTitle(RandomPhrase());
-    }, [toggleModal]);
+    });
 
     async function saveData(){
         let res;
-        var date = new Date().getDate();
-        var month = new Date().getMonth() + 1;
-        var year = new Date().getFullYear();
-   
-        let fullDate =  date + '-' + month + '-' + year;
-        await storeData('spendings', [{ id: uuid.v4(), description: description, sum: number, date: fullDate }]);
+        await storeData('spendings', [{ id: uuid.v4(), description: description, sum: number }]);
         res = await getData('spendings');
         console.log(JSON.stringify(res));
         toggleModal();
@@ -35,9 +30,12 @@ const CustomModal = ({ modalVisible, toggleModal }) => {
                 onRequestClose={toggleModal}
             >
                 <View style={styles.centeredView}>
-                   
                     <View style={styles.modalView}>
-                    <Text style={styles.modalTitle}>{title}</Text>
+                        {/* Close button (cross) */}
+                        <Pressable style={styles.closeButton} onPress={toggleModal}>
+                            <AntDesign name="close" size={24} color="black" />
+                        </Pressable>
+                        <Text style={styles.modalTitle}>{title}</Text>
                         <TextInput
                             style={styles.input}
                             onChangeText={onChangeNumber}
@@ -55,12 +53,12 @@ const CustomModal = ({ modalVisible, toggleModal }) => {
                             <Pressable
                                 style={[styles.button, styles.buttonSubmit]}
                                 onPress={saveData}>
-                                <Text style={styles.textStyle}>Submit</Text>
+                                <Text style={styles.textStyle}>Update</Text>
                             </Pressable>
                             <Pressable
                                 style={[styles.button, styles.buttonClose]}
                                 onPress={toggleModal}>
-                                <Text style={styles.textStyle}>Cancel</Text>
+                                <Text style={styles.textStyle}>Delete</Text>
                             </Pressable>
                         </View>
                     </View>
@@ -153,4 +151,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default CustomModal;
+export default ModalUpdate;
