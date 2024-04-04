@@ -1,8 +1,7 @@
-import { phrases } from "./phrases";
 
-
-export default function RandomPhrase() {
-    const index = Math.floor(Math.random() * phrases.length);
-    return phrases[index];
-
+export default function RandomPhrase(data) {
+    const index = Math.floor(Math.random() * data.length);
+    return data[index];
 }
+
+
