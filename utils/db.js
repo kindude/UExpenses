@@ -20,28 +20,25 @@ export const storeData = async (key, newValue) => {
 };
 
 export const updateData = async (key, idToUpdate, newData) => {
-  try {
+    try {
       const existingData = await AsyncStorage.getItem(key);
-
+  
       if (existingData) {
-          let dataArray = JSON.parse(existingData);
-          const updatedData = dataArray.map((spendingsArray) => {
-              if (Array.isArray(spendingsArray)) {
-                  return spendingsArray.map((spending) => {
-                      if (spending.id === idToUpdate) {
-                          return newData;
-                      }
-                      return spending;
-                  });
-              }
-              return spendingsArray;
-          });
-
-          await AsyncStorage.setItem(key, JSON.stringify(updatedData));
+        const dataArray = JSON.parse(existingData);
+  
+        const updatedData = dataArray.map(spendingsArray =>
+          Array.isArray(spendingsArray)
+            ? spendingsArray.map(spending =>
+                spending.id === idToUpdate ? newData : spending
+              )
+            : spendingsArray
+        );
+  
+        await AsyncStorage.setItem(key, JSON.stringify(updatedData));
       }
-  } catch (error) {
+    } catch (error) {
       console.error('Error updating data:', error);
-  }
+    }
 };
 
 export const getData = async (key) => {
