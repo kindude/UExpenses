@@ -26,12 +26,12 @@ export const updateData = async (key, idToUpdate, newData) => {
       if (existingData) {
         const dataArray = JSON.parse(existingData);
   
-        const updatedData = dataArray.map(spendingsArray =>
-          Array.isArray(spendingsArray)
-            ? spendingsArray.map(spending =>
-                spending.id === idToUpdate ? newData : spending
+        const updatedData = dataArray.map(DataArray =>
+          Array.isArray(DataArray)
+            ? DataArray.map(entry =>
+                entry.id === idToUpdate ? newData : entry
               )
-            : spendingsArray
+            : DataArray
         );
   
         await AsyncStorage.setItem(key, JSON.stringify(updatedData));
@@ -51,28 +51,24 @@ export const getData = async (key) => {
 };
 
 export const deleteData = async (id, key) => {
-  try {
+    try {
       let data = await getData(key);
-
+  
       if (!Array.isArray(data)) {
-          throw new Error('Retrieved data is not an array');
+        throw new Error('Retrieved data is not an array');
       }
-
-      const updatedData = data.map((spendingsArray) => {
-          if (!Array.isArray(spendingsArray)) {
-              throw new Error('Spendings array is not an array');
-          }
-          return spendingsArray.filter((spending) => spending.id !== id);
-      });
-
-      const filteredData = updatedData.filter((spendingsArray) => spendingsArray.length > 0);
-
+  
+      const filteredData = data.map(DataArray =>
+        Array.isArray(DataArray)
+          ? DataArray.filter(entry => entry.id !== id)
+          : DataArray
+      ).filter(DataArray => DataArray.length > 0);
+  
       await AsyncStorage.setItem(key, JSON.stringify(filteredData));
-  } catch (error) {
+    } catch (error) {
       console.error('Error deleting data:', error);
-  }
-};
-
+    }
+  };
 
 
 export const setTheme = async (key, value) => {

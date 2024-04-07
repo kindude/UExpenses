@@ -19,10 +19,15 @@ const ApplicationScreen = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [finished, setFinished] = useState(false);
   const fadeAnim = useRef(new Animated.Value(0)).current;
+
+
+
   useEffect(() => {
     authenticateWithBiometrics();
   }, []);
 
+
+  
   const [scheme, setScheme] = useState();
 
   const authenticateWithBiometrics = async () => {

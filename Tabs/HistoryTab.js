@@ -18,7 +18,14 @@ const HistoryTab = () => {
     const [filteredSpendings, setFilteredSpendings] = useState([]);
     const [item, setItem] = useState();
     const [total, setTotal] = useState();
+
     const isFocused = useIsFocused();
+
+
+
+
+
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState('Day');
     const [items, setItems] = useState([
@@ -74,6 +81,8 @@ const HistoryTab = () => {
             console.error('Error loading spendings:', error);
         }
     }, []);
+
+
 
     useEffect(() => {
         if (isFocused) {

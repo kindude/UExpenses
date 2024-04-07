@@ -24,14 +24,12 @@ const SettingsTab = () => {
 
     const reloadSpendingsAndGoal = async () => {
         try {
-            // Load goal first
             const retrGoal = await getDBGoal('goal');
             console.log(retrGoal);
             const g = parseFloat(retrGoal);
             setGoal(g);
             setGoalInput(retrGoal);
 
-            // Then load spendings
             const data = await getData('spendings');
             console.log('Retrieved spendings:', data);
 
@@ -91,6 +89,8 @@ const SettingsTab = () => {
             value: 'DARK'
         }
     ]), []);
+
+    
 
     useEffect(() => {
         const fetchTheme = async () => {

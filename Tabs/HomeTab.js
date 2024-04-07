@@ -28,12 +28,15 @@ export const useModalState = (initialState = false) => {
 const HomeTab = () => {
   const [spent, setSpent] = useState('');
   const [sound, setSound] = useState();
-  const isFocused = useIsFocused();
   const [idiom, setIdiom] = useState('');
-  const [modalVisible, toggleModal] = useModalState(false);
+
   const [scheme, setScheme] = useState();
   const [USD, setUSD] = useState();
   const [EUR, setEUR] = useState();
+
+  
+  const [modalVisible, toggleModal] = useModalState(false);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
     fetchTheme().then(theme => {
@@ -282,14 +285,14 @@ const styles = StyleSheet.create({
     marginTop: 200,
     paddingHorizontal: 20,
     borderRadius: 10,
-    backgroundColor: '#F5F5F5', // Add background color
+    backgroundColor: '#F5F5F5', 
     padding: 10,
   },
   ratesTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#333', // Change text color
+    color: '#333', 
   },
   rateItem: {
     flexDirection: 'row',
@@ -299,11 +302,11 @@ const styles = StyleSheet.create({
   rateCurrency: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#0077FF', // Change text color
+    color: '#0077FF',
   },
   rateValue: {
     fontSize: 18,
-    color: '#0077FF', // Change text color
+    color: '#0077FF', 
   },
 });
 
